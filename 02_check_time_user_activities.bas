@@ -35,7 +35,7 @@ Set objRegEx = CreateObject("vbscript.regexp")
 
 With objRegEx
   .Global = True
-  .Pattern = "0[0-9]:[0-5][0-9]"
+  .Pattern = "0[0-9]"
   Set objMatch = .Execute(strHour)
 End With
 
