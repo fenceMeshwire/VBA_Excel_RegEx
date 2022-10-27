@@ -5,6 +5,7 @@ Option Explicit
 ' Added column:
 ' user | time | count | hour
 
+' ===============================================================================
 Sub add_column_hour()
 
 Dim lngRow, lngRowMax As Long
