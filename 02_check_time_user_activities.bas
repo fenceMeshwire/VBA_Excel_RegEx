@@ -4,6 +4,7 @@ Option Explicit
 ' user | time | count
 ' Added column:
 ' user | time | count | hour
+' The added column countains the hour of time from the column "time"
 
 ' ============================================================
 Sub add_column_hour()
