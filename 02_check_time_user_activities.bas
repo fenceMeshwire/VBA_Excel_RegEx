@@ -4,9 +4,7 @@ Option Explicit
 ' user | time | count
 ' Added column:
 ' user | time | count | hour
-' The added column countains the hour of time from the column "time"
 
-' ============================================================
 Sub add_column_hour()
 
 Dim lngRow, lngRowMax As Long
@@ -27,7 +25,7 @@ End With
 
 End Sub
 
-' ============================================================
+' ===============================================================================
 Function check_hour(strHour) As String
 
 Dim objRegEx, objMatch As Object
@@ -44,7 +42,7 @@ If objMatch.Count = 1 Then check_hour = Right(strHour, 1) Else check_hour = strH
 
 End Function
 
-' ============================================================
+' ===============================================================================
 Sub cumsum_hour_usage()
 
 Dim i As Integer
@@ -58,19 +56,10 @@ Dim varHours As Variant
 Set wksSheet = Sheet1
 
 With wksSheet
-            
   ' Create hours array with no duplicates
-  ReDim varHours(i)
+  varHours = create_hours_array
+            
   lngRowMax = .UsedRange.Rows.Count
-  For lngRow = 2 To lngRowMax
-    strHour = .Cells(lngRow, 4).Value
-    If Not IsNumeric(Application.Match(strHour, varHours, 0)) Then ' No duplicates
-      varHours(i) = strHour
-      i = i + 1
-      ReDim Preserve varHours(i)
-    End If
-  Next lngRow
-  ReDim Preserve varHours(UBound(varHours) - 1)
   
   ' Accumulate user activities
   For i = LBound(varHours) To UBound(varHours)
@@ -86,11 +75,52 @@ With wksSheet
     Next lngRow
   Next i
   
-  ' Delete rows with no accumulated user activities for summary
+  ' Delete rows with no accumulated user activities for summary (optional)
   For lngRow = lngRowMax To 2 Step -1
     If .Cells(lngRow, 5).Value = "" Then .Rows(lngRow).Delete
   Next lngRow
   
 End With
+
+End Sub
+    
+' ===============================================================================
+Function create_hours_array() As Variant
+
+Dim i As Integer
+Dim intHour As Integer
+Dim lngRow, lngRowMax As Long
+Dim strHour As String
+Dim varHours As Variant
+Dim wksSheet As Worksheet
+
+Set wksSheet = Sheet1
+
+With wksSheet
+
+  ' Create hours array with no duplicates
+  ReDim varHours(i)
+  lngRowMax = .UsedRange.Rows.Count
+  For lngRow = 2 To lngRowMax
+    strHour = .Cells(lngRow, 4).Value
+    If Not IsNumeric(Application.Match(strHour, varHours, 0)) Then ' No duplicates
+      varHours(i) = strHour
+      i = i + 1
+      ReDim Preserve varHours(i)
+    End If
+  Next lngRow
+  
+  ReDim Preserve varHours(UBound(varHours) - 1)
+  create_hours_array = varHours
+  
+End With
+
+End Function
+
+' ===============================================================================
+Sub restore_initial_state()
+
+Sheet1.UsedRange.Clear
+data.UsedRange.Copy Destination:=Sheet1.Range("A1")
 
 End Sub
