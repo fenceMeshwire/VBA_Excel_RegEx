@@ -2,12 +2,14 @@ Option Explicit
 
 Sub find_regex_in_string()
 
-Dim lngRow, lngRowMax As Long
+Dim lngRow As Long
+Dim lngRowMax As Long
 Dim lngColToSearch As Long
 Dim strContent As String
 Dim wksSheet as Worksheet
 
 Set wksSheet = Sheet1
+    
 lngColToSearch = 1
 
 With Sheet1
@@ -28,7 +30,8 @@ End Sub
 
 Function isRegEx(strContent As String) As Boolean
 
-Dim objRegEx, objMatch As Object
+Dim objRegEx As Object
+Dim objMatch As Object
 
 Set objRegEx = CreateObject("vbscript.regexp")
 
