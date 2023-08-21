@@ -4,6 +4,7 @@ Option Explicit
 ' Purpose: Find a substring within a given string matching to a
 '          corresponding regex pattern, e.g. ABC123, AB1234
 ' Input:   Sheet1 contains cells with strings in column 1.
+           The term and the title are separated by a comma.
 ' _____________________________________________________________
 
 Sub split_id_title()
