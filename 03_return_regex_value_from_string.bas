@@ -37,8 +37,7 @@ Set objRegEx = CreateObject("vbscript.regexp")
 
 With objRegEx
   .Global = True
-  ' Pattern like: ABC123 | AB1234
-  .Pattern = "(A)[A-Z]{2}[0-9]{3}|(A)[A-Z][0-9]{4}"
+  .Pattern = "(A)[A-Z]{2}[0-9]{3}|(A)[A-Z][0-9]{4}" ' Pattern like: ABC123 | AB1234
   Set objMatch = .Execute(strLine)
 End With
 
