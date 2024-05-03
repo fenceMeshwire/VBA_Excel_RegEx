@@ -1,5 +1,6 @@
 Option Explicit
 
+'____________________________________________________________________________________________
 Sub find_regex_in_string()
 
 Dim lngRow As Long
@@ -27,7 +28,7 @@ End With
 End Sub
 
 ' Regular Expressions are usually defined in a function:
-
+'____________________________________________________________________________________________
 Function isRegEx(strContent As String) As Boolean
 
 Dim objRegEx As Object
